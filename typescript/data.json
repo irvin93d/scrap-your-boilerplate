@@ -1,0 +1,64 @@
+{
+  "type": "comppany",
+  "departments": [
+    {
+      "type": "department",
+      "name": "Research",
+      "manager": {
+        "type": "employee",
+        "person": {
+          "type": "person",
+          "name": "Ralf",
+          "address": "Amsterdam"
+        },
+        "salary": {
+          "type": "salary",
+          "value": 8000
+        }
+      },
+      "subunits": [
+        {
+          "type": "employee",
+          "person": {
+            "type": "person",
+            "name": "Joost",
+            "address": "Amsterdam"
+          },
+          "salary": {
+            "type": "salary",
+            "value": 1000
+          }
+        },
+        {
+          "type": "employee",
+          "person": {
+            "type": "person",
+            "name": "Marlow",
+            "address": "Cambridge"
+          },
+          "salary": {
+            "type": "salary",
+            "value": 2000
+          }
+        }
+      ]
+    },
+    {
+      "type": "department",
+      "name": "Strategy",
+      "manager": {
+        "type": "employee",
+        "person": {
+          "type": "person",
+          "name": "Blair",
+          "address": "London"
+        },
+        "salary": {
+          "type": "salary",
+          "value": 100000
+        }
+      },
+      "subunits": []
+    }
+  ]
+}
