@@ -25,7 +25,9 @@ source-repository head
 
 library
   exposed-modules:
+      Boilerplate
       Lib
+      Model
   other-modules:
       Paths_scrap_your_boilerplate
   hs-source-dirs:

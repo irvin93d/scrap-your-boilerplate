@@ -5,35 +5,67 @@
 
 module Main where
 
+import Boilerplate
 import Data.Maybe
 import Data.Typeable
+import Debug.Trace
 import GHC.Generics
 import Lib
+import Model
 import Unsafe.Coerce
 
 main :: IO ()
 main = do
   print genCom
   print $ increase 0.1 genCom
-  print $ inc 0.1 genCom
+  print $ increase' 0.1 genCom
+
+instance Term a => Term [a] where
+  gmapT f [] = []
+  gmapT f (x : xs) = f x : f xs
 
 newtype Company = C [Dept] deriving (Show)
 
+instance Term Company where
+  gmapT f (C depts) = C (f depts)
+
 data Dept = D Name Manager [SubUnit] deriving (Show)
+
+instance Term Dept where
+  gmapT f (D name manager subunits) = D (f name) (f manager) (f subunits)
 
 data SubUnit = PU Employee | DU Dept deriving (Show)
 
+instance Term SubUnit where
+  gmapT f (PU empl) = PU (f empl)
+  gmapT f (DU dept) = DU (f dept)
+
 data Employee = E Person Salary deriving (Show)
+
+instance Term Employee where
+  gmapT f (E per sal) = E (f per) (f sal)
 
 data Person = P Name Address deriving (Show)
 
+instance Term Person where
+  gmapT f (P name address) = P (f name) (f address)
+
 newtype Salary = S Float deriving (Show)
+
+instance Term Salary where
+  gmapT f (S x) = S (f x)
 
 type Manager = Employee
 
 type Name = String
 
 type Address = String
+
+instance Term Char where
+  gmapT f x = x
+
+instance Term Float where
+  gmapT f x = x
 
 genCom :: Company
 genCom =
@@ -53,9 +85,6 @@ increase k (C ds) = C (map (incD k) ds)
 
 increase' :: Float -> Company -> Company
 increase' k = everywhere (mkT (incS k))
-
-instance Term Company where
-  gmapT 
 
 inc :: Typeable a => Float -> a -> a
 inc k = mkT (incS k)
