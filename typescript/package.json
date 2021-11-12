@@ -1,13 +1,16 @@
 {
   "name": "scrap-your-boilerplate",
   "version": "1.0.0",
-  "main": "main.ts",
+  "main": "src/main.ts",
   "license": "MIT",
   "dependencies": {
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "start": "ts-node ./main.ts"
+    "start": "ts-node ./src/main.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7"
   }
 }
