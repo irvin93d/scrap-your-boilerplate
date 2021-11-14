@@ -1,0 +1,60 @@
+\documentclass[14pt]{beamer}
+% Beamer automatically loads amsmath, amssymb, amsthm, hyperref, graphicx
+
+\usepackage[none]{hyphenat}
+
+\usetheme[progressbar=frametitle]{metropolis}
+
+% THEME
+\definecolor{vorange}{HTML}{FF9800}
+\definecolor{vgrey}{HTML}{BDBDBD}
+\definecolor{vblack}{HTML}{1A1A1A}
+
+\setbeamercolor{progress bar}{fg=vorange, bg=vgrey}
+\setbeamercolor{palette primary}{bg=vgrey,fg=white}
+ %\setbeamercolor{palette secondary}{bg=vgrey,fg=vorange}
+ %\setbeamercolor{palette tertiary}{bg=vgrey,fg=vorange}
+ %\setbeamercolor{palette quaternary}{bg=vgrey,fg=vorange}
+
+% FONT
+\renewcommand{\familydefault}{\rmdefault}
+
+% BIBLIOGRAPHY
+\bibliographystyle{acm}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamerfont{bibliography item}{size=\tiny}
+\setbeamerfont{bibliography entry author}{size=\tiny}
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry location}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
+
+\title{Scraph You Boilerplate}
+\subtitle{A Practical Design Pattern for Generic Programming}
+\author{
+  Duane~Irvin \\
+  \href{mailto:duane@student.chalmers.se}{duane@student.chalmers.se}
+}
+\institute{
+  Room~EG-5215A~---~16~November~13.15\\
+  DAT-315~---~The~computer~scientist~in~society\\
+  \textsc{Chalmers~University~of~Technology}
+}
+\date{}
+
+\begin{document}
+
+\begin{frame}\titlepage\end{frame}
+
+\begin{frame}\frametitle{Filler page!}
+  \textbf{What is this?}
+
+  Well, the presenation is in 5 days, but there was a deadline in fire, so I guess I need to submit something!
+
+    But hey, at least I can test the my \LaTeX{} citation and its boilerplate is working correctly \cite{lammel2003scrap}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{References}
+  \bibliography{include/backmatter/Bibliography}
+\end{frame}
+
+\end{document}
