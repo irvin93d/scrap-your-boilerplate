@@ -1,8 +1,7 @@
 import styled from 'styled-components/macro'
 
 export const Colorize = styled.span<{ color: string; delay: number }>`
+  transition: all 1000ms ease ${({ delay }) => delay}ms;
   color: ${({ color }) => color};
-  transition: color 250ms ease ${({ delay }) => delay}ms,
-    font-weight 250ms ease ${({ delay }) => delay}ms;
-  font-weight: ${({ color }) => (color !== 'inherit' ? 'bold' : 'normal')};
+  font-weight: ${({ color }) => (color !== 'inherit' ? '800' : 'normal')};
 `

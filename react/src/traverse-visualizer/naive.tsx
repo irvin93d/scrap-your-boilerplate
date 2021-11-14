@@ -5,9 +5,7 @@ import { Colorize } from './colorize'
 export const NaiveTraverse = () => {
   const separation = 1000
 
-  const delay = (i: number) => {
-    return i * separation
-  }
+  const delay = (i: number) => i * separation
 
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])

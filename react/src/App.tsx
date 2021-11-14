@@ -50,7 +50,7 @@ const App = () => {
                 <tr>
                   <th>Department</th>
                   <th>Sub-deps</th>
-                  <th className="numeric">Employees (incl/excl sub-deps)</th>
+                  {/*<th className="numeric">Employees (incl/excl sub-deps)</th>*/}
                   <th className="numeric">Bill</th>
                   <th className="numeric">Bill sub-deps</th>
                 </tr>
@@ -63,6 +63,7 @@ const App = () => {
                           .map(({ name }) => name)
                           .join(', ') || '-'}
                       </td>
+                      {/*
                       <td className="numeric">
                         {selectEmployees(department).length}
                         {' / '}
@@ -70,8 +71,9 @@ const App = () => {
                           selectEmployeesWithDepartment(department).filter(
                             (employee) => employee.department === department,
                           ).length
-                        }
-                      </td>
+                              }
+                          </td>
+                        */}
 
                       <td className="numeric">{bill(department)}</td>
 
