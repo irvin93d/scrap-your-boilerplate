@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import styled, { createGlobalStyle, DefaultTheme, ThemeProvider } from 'styled-components/macro'
 
-import { Button } from './components/Button'
+import { Button, MoneyButton } from './components/Button'
 import { FadeIn } from './components/FadeIn'
 import { HStack, VStack } from './components/Stack'
 import data from './data'
 import { bill } from './queries/bill'
 import { billSubunits } from './queries/billSubunits'
 import { selectDepartments } from './queries/selectDepartments'
-import { selectEmployees } from './queries/selectEmployees'
 import { selectEmployeesWithDepartment } from './queries/selectEmployeesWithDepartment'
 import { selectSubdepartments } from './queries/selectSubdepartments'
 import { increase } from './transformers/increase'
 import { TraverseVisualizer } from './traverse-visualizer'
+
+const TITLE = 'Departments'
 
 const fonts: DefaultTheme['fonts'] = { primary: 'Courier New, Courier, monospace' }
 
@@ -44,7 +45,7 @@ const App = () => {
       <Styles>
         <FadeIn>
           <VStack gap="small">
-            <h2>Departments</h2>
+            <h2>{TITLE}</h2>
             <HStack alignItems="flex-start">
               <table>
                 <tr>
@@ -52,7 +53,7 @@ const App = () => {
                   <th>Sub-deps</th>
                   {/*<th className="numeric">Employees (incl/excl sub-deps)</th>*/}
                   <th className="numeric">Bill</th>
-                  <th className="numeric">Bill sub-deps</th>
+                  {/* <th className="numeric">Bill sub-deps</th> */}
                 </tr>
                 <tbody>
                   {selectDepartments(company).map((department) => (
@@ -77,7 +78,7 @@ const App = () => {
 
                       <td className="numeric">{bill(department)}</td>
 
-                      <td className="numeric">{billSubunits(department)}</td>
+                      {/* <td className="numeric">{billSubunits(department)}</td> */}
                     </tr>
                   ))}
                 </tbody>
@@ -88,7 +89,7 @@ const App = () => {
               <table>
                 <tr>
                   <th>Employee</th>
-                  <th>Address</th>
+                  <th>Manager</th>
                   <th>Department</th>
                   <th className="numeric">Salary</th>
                 </tr>
@@ -97,7 +98,9 @@ const App = () => {
                     ({ employee: { salary, person }, department }) => (
                       <tr key={`${department.name}-${person.name}`}>
                         <td>{person.name}</td>
-                        <td>{person.address}</td>
+                        <td className="symbol">
+                          {person.name === department.manager.person.name ? '✅' : '❌'}
+                        </td>
                         <td>{department.name}</td>
                         <td className="numeric">{paddedNumber(salary.value)}</td>
                       </tr>
@@ -106,9 +109,9 @@ const App = () => {
                 </tbody>
               </table>
             </HStack>
-            <HStack justifyContent="flex-start">
-              <Button onClick={increaseAll}>Increase salaries!</Button>
-              <Button onClick={increaseAll}>Decrease salaries :(</Button>
+            <HStack justifyContent="center">
+              <MoneyButton onClick={increaseAll}>Increase 💵</MoneyButton>
+              <MoneyButton onClick={increaseAll}>Decrease 💸</MoneyButton>
             </HStack>
             <h2>Visualization</h2>
             <TraverseVisualizer />
@@ -210,13 +213,16 @@ const Styles = styled.div`
   td,
   th {
     text-align: left;
-    padding: 12px 0;
+    padding: 8px 0;
     &:not(:first-child) {
       padding-left: 24px;
     }
   }
   .numeric {
     text-align: right;
+  }
+  .symbol {
+    text-align: center;
   }
 `
 

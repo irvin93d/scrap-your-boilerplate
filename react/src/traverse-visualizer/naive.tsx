@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Colorize } from './colorize'
+import { ColorizeBackground as Colorize } from './colorize'
 
 export const NaiveTraverse = () => {
   const separation = 1000

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styled from 'styled-components/macro'
 
 import { Button } from '../components/Button'
 import { HStack, VStack } from '../components/Stack'
@@ -21,14 +22,20 @@ export const TraverseVisualizer = () => {
   })()
   return (
     <VStack>
-      <HStack justifyContent="flex-start">
+      <HStack justifyContent="center">
         <Button onClick={() => setView('data')}>Data structure</Button>
         <Button onClick={() => setView('naive')}>Naive traverse</Button>
         <Button onClick={() => setView('exhaustive')}>Exhaustive Traverse</Button>
       </HStack>
-      <FadeIn key={view}>
-        <View />
-      </FadeIn>
+      <Wrapper>
+        <FadeIn key={view}>
+          <View />
+        </FadeIn>
+      </Wrapper>
     </VStack>
   )
 }
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
