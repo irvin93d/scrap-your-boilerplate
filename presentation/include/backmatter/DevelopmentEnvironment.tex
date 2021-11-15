@@ -1,0 +1,44 @@
+% CREATED BY DUANE IRVIN, 2020
+\chapter{Development Environment}\label{appendix:environment}
+
+\section{Developer and Hosting Machine}\label{sec:developermachine}
+For development and server/client hosting, the following machine was used:
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{lX}
+    \multicolumn{2}{l}{\textbf{Macbook Pro 13}}                     \\ \hline
+    OS            & \texttt{macOS Catalina 10.15.4}                 \\
+    \go{}         & \texttt{go1.13.4 darwin/amd64}                  \\
+    \node{}       & \texttt{v14.3.0}                                \\
+    \npm{}        & \texttt{6.14.4}                                 \\
+    Google Chrome & \texttt{83.0.4103.61} (Official Build) (64-bit) \\
+  \end{tabularx}
+\end{table}
+
+\section{Testing Environments}
+For testing the Votify Client, two devices were used --- The developer machine from
+\autoref{sec:developermachine} using Google Chrome's Device Simulation Mode and the device below:
+
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{lX}
+    \multicolumn{2}{l}{\textbf{Xiaomi Redmi Note 7}}         \\ \hline
+    OS            & Android 9 (Pie) \texttt{PKG1.180904.001} \\
+    Google Chrome & \texttt{83.0.4103.83}                    \\
+  \end{tabularx}
+\end{table}
+
+\section{Votify Server Dependencies}
+This is the \texttt{go.mod} containing the dependencies that was used for Votify Server.
+\inputminted{go}{code/server.go.mod}
+
+\clearpage
+\section{Votify Client Dependencies}
+This is the \texttt{package.json} that was used for Votify Client:
+\inputminted{json}{code/client.package.json}
+\clearpage
+This is the \ts{} compiler configuration file, \texttt{tsconfig.json}, that was used for Votify
+Client:
+\inputminted{json}{code/client.tsconfig.json}
+
+
