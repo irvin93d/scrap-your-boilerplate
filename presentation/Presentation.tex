@@ -46,29 +46,41 @@
 \begin{frame}\titlepage\end{frame}
 
 \begin{frame}
-  \includegraphics[height=0.34\textheight,width=\textwidth,keepaspectratio]{graphics/interface-company-ts.png}
-  \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio]{graphics/interface-department-ts.png}
+  \textbf{Company Model}
+  \vfill
+  \includegraphics[height=0.272\textheight,width=\textwidth,keepaspectratio]{graphics/interface-company-ts.png}
+  \includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio]{graphics/interface-department-ts.png}
 \end{frame}
 
 \begin{frame}
-  \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio]{graphics/interface-employee-ts.png}
-  \includegraphics[height=0.33\textheight,width=\textwidth,keepaspectratio]{graphics/interface-salary-ts.png}
+  \textbf{Employee Model}
+  \vfill
+  \includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio]{graphics/interface-employee-ts.png}
+  \includegraphics[height=0.264\textheight,width=\textwidth,keepaspectratio]{graphics/interface-salary-ts.png}
 \end{frame}
 
 \begin{frame}
-  \includegraphics[height=\textheight,width=\textwidth,keepaspectratio]{graphics/interface-subunit-ts.png}
+  \textbf{Sub unit of department}
+  \vfill
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/interface-subunit-ts.png}
 \end{frame}
 
 \begin{frame}
-  \includegraphics[height=\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step1-ts.png}
+  \textbf{Increase salary at company}
+  \vfill
+  \includegraphics[height=0.9\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step1-ts.png}
 \end{frame}
 
 \begin{frame}
-  \includegraphics[height=\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step2-ts.png}
+  \textbf{Increase salary at each department}
+  \vfill
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step2-ts.png}
 \end{frame}
 
 \begin{frame}
-  \includegraphics[height=\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step3-ts.png}
+  \textbf{Increase salary for each employee}
+  \vfill
+  \includegraphics[height=0.9\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step3-ts.png}
 \end{frame}
 
 \begin{frame}
@@ -87,12 +99,12 @@
   \begin{columns}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{Before}
+      \textbf{increase Before}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-ts.png}
     \end{column}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{After}
+      \textbf{increase After}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/increase-ts.png}
     \end{column}
   \end{columns}
@@ -102,44 +114,59 @@
   \begin{columns}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{Before}
+      \textbf{bill Before}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/bill-naive-ts.png}
     \end{column}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{After}
+      \textbf{bill After}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/bill-ts.png}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
-  \textbf{Before}
+  \textbf{Haskell Before}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/bill-naive-hs.png}
   \vfill
 \end{frame}
 
 \begin{frame}
-  \textbf{After}
+  \textbf{Haskell After}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/bill-hs.png}
   \vfill
 \end{frame}
 
 \begin{frame}
-  \textbf{Prior work}
   \vfill
-    Traverse arbitrarily nested data structures:\\
-    A new approach to generic functional programming. Hinze, R., 2000 \cite{hinze2000new}
+  \textbf{Key idea}
+  \vfill
+  \centering
+  Rethink how we traverse data
+  \vfill
+  $\Downarrow$
+  \vfill
+  Pure boilerplate can separated and generated
+  \vfill
+\end{frame}
+
+\begin{frame}
+  \textbf{Prior related work}
+  \vfill
+  A new approach to generic functional programming. Hinze, R., 2000 \cite{hinze2000new}
+  \vfill
+  \small{But poly-typic programming is too strict to be useful}
   \vfill
 \end{frame}
 
 \begin{frame}
   \textbf{Derivative work}
   \vfill
-    Go beyond \texttt{show}, \texttt{map} and \texttt{reduce}:\\
-    ``Scrap Your Boilerplate'' Revolutions. Hinze, R., and L\"{o}h, 2006 \cite{hinze2006scrap}
+  Go beyond \texttt{show}, \texttt{map} and \texttt{reduce}:\\
+  \vfill
+  ``Scrap Your Boilerplate'' Revolutions. Hinze, R., and L\"{o}h, 2006 \cite{hinze2006scrap}
   \vfill
 \end{frame}
 
