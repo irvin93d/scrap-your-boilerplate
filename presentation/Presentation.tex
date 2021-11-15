@@ -46,65 +46,83 @@
 \begin{frame}\titlepage\end{frame}
 
 \begin{frame}
-  \textbf{Company Model}
   \vfill
-  \includegraphics[height=0.272\textheight,width=\textwidth,keepaspectratio]{graphics/interface-company-ts.png}
-  \includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio]{graphics/interface-department-ts.png}
+  \centering\textbf{Apps $>$ Powerpoints}
+  \vfill
+\end{frame}
+
+%\begin{frame}
+  %\textbf{Company Model}
+  %\vfill
+  %\includegraphics[height=0.272\textheight,width=\textwidth,keepaspectratio]{graphics/interface-company-ts.png}
+  %\includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio]{graphics/interface-department-ts.png}
+%\end{frame}
+
+%\begin{frame}
+  %\textbf{Employee Model}
+  %\vfill
+  %\includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio]{graphics/interface-employee-ts.png}
+  %\includegraphics[height=0.264\textheight,width=\textwidth,keepaspectratio]{graphics/interface-salary-ts.png}
+%\end{frame}
+
+%\begin{frame}
+  %\textbf{Sub unit of department}
+  %\vfill
+  %\includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/interface-subunit-ts.png}
+%\end{frame}
+
+\begin{frame}
+  \vfill
+  \centering\textbf{Let's look at how we'd increase all salaries!}
+  \vfill
 \end{frame}
 
 \begin{frame}
-  \textbf{Employee Model}
-  \vfill
-  \includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio]{graphics/interface-employee-ts.png}
-  \includegraphics[height=0.264\textheight,width=\textwidth,keepaspectratio]{graphics/interface-salary-ts.png}
-\end{frame}
-
-\begin{frame}
-  \textbf{Sub unit of department}
-  \vfill
-  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/interface-subunit-ts.png}
-\end{frame}
-
-\begin{frame}
-  \textbf{Increase salary at company}
+  \centering\textbf{Increase salary at company}
   \vfill
   \includegraphics[height=0.9\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step1-ts.png}
 \end{frame}
 
 \begin{frame}
-  \textbf{Increase salary at each department}
+  \centering\textbf{Increase salary at each department}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step2-ts.png}
 \end{frame}
 
 \begin{frame}
-  \textbf{Increase salary for each employee}
+  \centering\textbf{Increase salary for each employee}
   \vfill
   \includegraphics[height=0.9\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-step3-ts.png}
 \end{frame}
 
 \begin{frame}
-  \textbf{That's a lot of code! :(}
+  \centering\textbf{That's a lot of code! :(}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-ts.png}
 \end{frame}
 
 \begin{frame}
-  \textbf{What if we could?}
+  \centering\textbf{What if we could?}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/increase-ts.png}
+\end{frame}
+
+\begin{frame}
+  \vfill
+  \centering\textbf{Let's look at a different traverse!}
+  \vfill
 \end{frame}
 
 \begin{frame}
   \begin{columns}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{increase Before}
+      \centering\textbf{increase Before}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/increase-naive-ts.png}
     \end{column}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{increase After}
+      \centering\textbf{increase After}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/increase-ts.png}
     \end{column}
   \end{columns}
@@ -114,26 +132,26 @@
   \begin{columns}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{bill Before}
+      \centering\textbf{bill Before}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/bill-naive-ts.png}
     \end{column}
     \begin{column}{.5\textwidth}
       \vspace{1em}
-      \textbf{bill After}
+      \centering\textbf{bill After}
       \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio]{graphics/bill-ts.png}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
-  \textbf{Haskell Before}
+  \centering\textbf{Haskell Before}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/bill-naive-hs.png}
   \vfill
 \end{frame}
 
 \begin{frame}
-  \textbf{Haskell After}
+  \centering\textbf{Haskell After}
   \vfill
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio]{graphics/bill-hs.png}
   \vfill
@@ -141,7 +159,7 @@
 
 \begin{frame}
   \vfill
-  \textbf{Key idea}
+  \centering\textbf{Key idea}
   \vfill
   \centering
   Rethink how we traverse data
@@ -153,7 +171,7 @@
 \end{frame}
 
 \begin{frame}
-  \textbf{Prior related work}
+  \centering\textbf{Prior related work}
   \vfill
   A new approach to generic functional programming. Hinze, R., 2000 \cite{hinze2000new}
   \vfill
@@ -162,7 +180,7 @@
 \end{frame}
 
 \begin{frame}
-  \textbf{Derivative work}
+  \centering\textbf{Derivative work}
   \vfill
   Go beyond \texttt{show}, \texttt{map} and \texttt{reduce}:\\
   \vfill
