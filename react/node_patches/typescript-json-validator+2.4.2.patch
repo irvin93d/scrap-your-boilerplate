@@ -1,0 +1,21 @@
+diff --git a/node_modules/typescript-json-validator/lib/template.js b/node_modules/typescript-json-validator/lib/template.js
+index b2fea73..fe3eb70 100644
+--- a/node_modules/typescript-json-validator/lib/template.js
++++ b/node_modules/typescript-json-validator/lib/template.js
+@@ -33,14 +33,14 @@ exports.declareAJV = (options) => `export const ajv = new Ajv(${json_stable_stri
+ 
+ ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'));
+ `;
+-exports.exportNamed = (names) => `export {${names.join(', ')}};`;
++exports.exportNamed = (names) => ``;
+ exports.declareSchema = (name, schema) => `export const ${name} = ${json_stable_stringify_1.default(schema, { space: 2 })};`;
+ exports.addSchema = (name) => `ajv.addSchema(${name}, '${name}')`;
+ exports.DECLARE_VALIDATE_TYPE = `export type ValidateFunction<T> = ((data: unknown) => data is T) & Pick<Ajv.ValidateFunction, 'errors'>`;
+ exports.validateType = (typeName) => `ValidateFunction<${typeName}>`;
+ exports.compileSchema = (schemaName, typeName) => `ajv.compile(${schemaName}) as ${exports.validateType(typeName)}`;
+ exports.validateFn = (typeName, schemaName) => `export const is${typeName} = ${exports.compileSchema(schemaName, typeName)};
+-export default function validate(value: unknown): ${typeName} {
++export function validate${typeName}(value: unknown): ${typeName} {
+   if (is${typeName}(value)) {
+     return value;
+   } else {
