@@ -81,6 +81,15 @@ const App = () => {
                       {/* <td className="numeric">{billSubunits(department)}</td> */}
                     </tr>
                   ))}
+                  <tr>
+                    <td>
+                      <b>Total</b>
+                    </td>
+                    <td></td>
+                    <td className="numeric">
+                      <b>{bill(company)}</b>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </HStack>
