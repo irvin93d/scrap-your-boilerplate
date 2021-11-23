@@ -116,7 +116,12 @@ In this case, `mkQ` stands for _make query_ and the code reads "Query every sala
   At this point the reader should become curious and think "wait what, how can we do that?"
 -->
 
-Describe how it works in a short but complete way. This should cover what wasn't covered in the intro.
+We can accomplish this by fundamentally changing the way we traverse the data structure. Looking back at the initial `increase` implentation and all of its helper functions, we can identify that they do two things:
+
+1. Define how traverse the schema.
+2. Define how to transform some data `a -> a`.
+
+If for 1., instead of just traversing a part of the data, we would traverse _all_ data for any transormation, then it would be sufficient to only write code for traversing once. Then, we can apply the transformation function `a -> a` in 2. to every sub-part of the the data. If the part is of type `Salary`, that function would be `billS`. Otherwise, it would be `id` (just return the parameter).
 
 ## What about polytypic programming
 
