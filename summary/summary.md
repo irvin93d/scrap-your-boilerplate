@@ -2,7 +2,7 @@
 
 This will be a summary of scrap your boilerplate! Now, let's go and do it!
 
-## Too much code?
+## The problem
 
 <!-- Throw reader directly in an understandable data structure -->
 
@@ -85,6 +85,30 @@ Writing this boilerplate is not just tedious. As we can see, it has to be repeat
 All of this boilerplate also raises another concern. If the schema describing the company changes, so does all of the functions recursing the data. That means we would have to rewrite huge parts of the boilerplate!
 
 ## The fix
+
+"Scrap your boilerplate: A Practical Design for Generic Programming" (herein after referred to as _SYB_) presents an approach to this problem which reduces the manually written programming code for `increase` to:
+
+```haskell
+increase :: Float -> Company -> Company
+increase k = everywhere (mkT (incS k))
+
+incS :: Float -> Salary -> Salary
+incS k (S s) = S (s * (1+k))
+```
+
+Here, `mkT` stands for _make transformation_. Hence, we can read the code as "Everywhere, make the transformation increase salary by `k`". Or, in a more human-friendly sentence, "increase every salary by `k`"
+
+Similarily, the `bill` function would be written as:
+
+```haskell
+bill :: Company -> Float
+bill = everything (+) (0 `mkQ` billS)
+
+billS :: Salary -> Float
+billS (S v) = v
+```
+
+In this case, `mkQ` stands for _make query_ and the code reads "Query every salary and add them together with the plus-operator, with a starting value 0". Or again, as human-friendly sentence, "Sum all salaries".
 
 <!--
   Provide a theoretical example of what an interface could look like.
