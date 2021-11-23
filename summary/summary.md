@@ -6,7 +6,7 @@ This will be a summary of scrap your boilerplate! Now, let's go and do it!
 
 <!-- Throw reader directly in an understandable data structure -->
 
-Let's consider a simple data structure to store information about a company. It has a name and a set of departments. Each department has a name and a set of sub-units. A sub-unit may either be an employee or another department. An employee is a person and has a salary.
+Let's consider a simple data structure to store information about a company. It has a name and a set of departments. Each department has a name and a set of sub-units. A sub-unit may either be an employee or another department. An employee is a person and has a salary. We can define with the following Haskell schema:
 
 ```haskell
 data Company    = C [Dept]
@@ -20,11 +20,11 @@ type Name       = String
 type Address    = String
 ```
 
-This schema could easily be translated into a document format like XML.
+This schema can easily be translated into a document format like XML.
 
 <!-- Page 27, ref 35 if we want to include tools for conversion -->
 
-If we would want to increase the salary by a factor of `k` for every employee in the company, we would define a function `increase`:
+If we want to increase the salary by a factor of `k` for every employee in the company, we define a function `increase`:
 
 ```haskell
 increase :: Float -> Company -> Company
@@ -33,7 +33,7 @@ increase k (C ds) = C (map (incD k) ds)
 
 <!-- Show the typical code to give an idea of tedious boilerplate (transformer) -->
 
-I.e., we would increase the salary by the factor `k` individually for every department at the company. Now we must also define `incD` and another set of helper functions:
+I.e., we increase the salary by the factor `k` individually for every department at the company. Now, we must also define `incD` and another set of helper functions:
 
 ```haskell
 incD :: Float -> Dept -> Dept
@@ -55,7 +55,7 @@ incS k (S s) = S (s * (1+k))
 
 Looking at the code above, the only intereresting bit is `incS`. In `incS` we find the code that actually increases `Salary`. The rest is repetitive code to traverse the data structure. This repetive code is what we call "boilerplate".
 
-If we would compute the sum of all payed salaries at the company, the code would be almost identical. We define `bill`:
+If we want to compute the sum of all payed salaries at the company, the code would be almost identical. We define `bill`:
 
 <!-- Provide another example (query) to show that this is a recurring pattern. At this point the reader will be convinced. -->
 
@@ -82,7 +82,7 @@ billS (S v) = v
 
 Writing this boilerplate is not just tedious. As we can see, it has to be repeated for a new functionality that traverses the data. As the complexity of the data increases, so does also the ratio of boilerplate.
 
-All of this boilerplate also raises another concern. If the schema describing the company changes, so does all of the functions recursing the data. That means we would have to rewrite huge parts of the boilerplate!
+All of this boilerplate raises another concern. If the schema describing the company changes, so does all of the functions we have defined. That means we would have to rewrite huge parts of the boilerplate!
 
 ## The fix
 
