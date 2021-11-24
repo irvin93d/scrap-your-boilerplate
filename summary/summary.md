@@ -1,8 +1,8 @@
 # Scrap your boilerplate
 
-This will be a summary of scrap your boilerplate! Now, let's go and do it!
+> TBD: Some short intro should go here.
 
-## The problem
+## Typical boilerplate
 
 <!-- Throw reader directly in an understandable data structure -->
 
@@ -51,7 +51,7 @@ incS k (S s) = S (s * (1+k))
 ```
 
 > Question for the reader:
-> If I'd expand the names of the code above to make it more readable, what names would I expand?
+> If I'd expand the names of the code above to make it more readable, what names would I expand? Would it be easier to follow if I strip down the schema to something simpler than the original paper uses?
 
 Looking at the code above, the only intereresting bit is `incS`. In `incS` we find the code that actually increases `Salary`. The rest is repetitive code to traverse the data structure. This repetive code is what we call "boilerplate".
 
@@ -64,8 +64,7 @@ bill :: Company -> Float
 bill (C ds) = foldl (\v d -> v + billD d) 0 ds
 
 billD :: Department -> Float
-billD (Department nm mgr us) =
- foldl (\v d -> v + billU d) (billE mgr) us
+billD (Department nm mgr us) = foldl (\v d -> v + billU d) (billE mgr) us
 
 billU :: SubUnit -> Float
 billU (PU e) = billE e
@@ -84,7 +83,7 @@ Writing this boilerplate is not just tedious. As we can see, it has to be repeat
 
 All of this boilerplate raises another concern. If the schema describing the company changes, so does all of the functions we have defined. That means we would have to rewrite huge parts of the boilerplate!
 
-## The fix
+## The solution
 
 "Scrap your boilerplate: A Practical Design for Generic Programming" (herein after referred to as _SYB_) presents an approach to this problem which reduces the manually written programming code for `increase` to:
 
@@ -118,46 +117,95 @@ In this case, `mkQ` stands for _make query_ and the code reads "Query every sala
 
 We can accomplish this by fundamentally changing the way we traverse the data structure. Looking back at the initial `increase` implentation and all of its helper functions, we can identify that they do two things:
 
-1. Define how traverse the schema.
-2. Define how to transform some data `a -> a`.
+1. Define how traverse some schema `data :: a`.
+2. Define how to transform some data `f :: a -> a`
 
-If for 1., instead of just traversing a part of the data, we would traverse _all_ data for any transormation, then it would be sufficient to only write code for traversing once. Then, we can apply the transformation function `a -> a` in 2. to every sub-part of the the data. If the part is of type `Salary`, that function would be `billS`. Otherwise, it would be `id` (just return the parameter).
+For 1., the initial implementation only traverses parts of the data structure that are relevant to be able to apply whatever function given by 2, leaving anything irrelevant untouched. SYB suggests that instead of exclusively traversing relevant data, one can achieve the same result by traversing _all the data_. Then by using type casting in runtime on each sub-part of the data, one would apply the transforming function in 2 to any part the casts successfully. This is easiest explained by example:
 
-## What about polytypic programming
+Recall our function `incS`
+```haskell
+incS :: Float -> Salary -> Salary
+incS k (S s) = S (s * (1+k))
+```
 
-It's too strict.
+We give everywhere something of type `Salary`:
 
-- Describe why.
-- Check if there's anything else we need to add
+```haskell
+x :: Salary
+x = S 1000
 
-## Cool, now what?
+y :: Salary
+y = everywhere (mkT (incS 0.10)) x
+```
 
-Read the other papers that came after. What cool stuff happened there?
+The type of `x` is matching the type of `incS`. The type cast is therefore successful and the transformer function `incS` is applied. `y` will now have value `1100`.
 
-## Instructions
+We give everywhere something not of type `Salary`:
 
-Your goal is to write a short article suitable for your fellow students, which will enable them to quickly learn about the topic. Write a summary of the paper’s key ideas and relate them to the other papers you have read.
+```haskell
+x :: Name
+x = "Bill"
 
-- What problem your main paper of choice is solving
-- Why this problem is important
-- The key ideas in the paper
-- Why this paper is important (with reference to the papers that came before and after).
-- Limited to 5 pages (not including references)
+y :: Name
+y = everywhere (mkT (incS 0.10)) x
+```
 
-## Quick links
+Since `x` is now not of type `Salary`, the type-cast will fail. `x` will remain untouched, resulting in `y == x`.
 
-Canvas
-https://chalmers.instructure.com/courses/16005
+Now to the more interesting case:
 
-Exercise
-https://chalmers.instructure.com/courses/16005/pages/summary-exercise
+```haskell
+p :: Person
+p = P "Bill" "Medina"
 
-Fire
-https://css-lp2-21.fire.cse.chalmers.se/labs/3
+s :: salary
+s = S 1000
 
-## Deadlines
+x :: Employee
+x = E p s
 
-Draft: Nov 24
-First revision: Nov 30
-Peer review: Dec 6
-Final version: Dec 10
+y :: Employee
+y = everywhere (mkT (incS 0.10)) x
+```
+
+Now, `x` fails to cast into `Salary`. But it has some internal data that can be traversed, `p` and `s`. `p` is traversed the same way, also failing to type cast. So does its inner data values `"Bill"` and `"Medina"`. Everything about `p` is therefore left unchanged. However, `s` type casts into `Salary`, so we apply the transformer `incS`. Now, `y` is identical to `x`, but with an updated salary.
+
+## Where did the boilerplate go?
+
+We saw in the previous section a hypothetical interface would reduce the amount of handwritten code. However, we left out two parts:
+1. How does the type cast happen?
+2. How does haskell know how to traverse the data?
+
+We won't go into the details here, but for 1. the type cast and the traversing itself would be handled by a library providing functions such as `everything`, `everywhere`, `mkT` and `mkQ`. 
+
+For 2., it would be left to the developer to define how to traverse the data. It would done by defining two functions via a class instance:
+```haskell
+instance Term Employee where
+  gmapT f (Employee per sal) = Employee (f per) (f sal)
+  gmapQ f (Employee per sal) = [f per, f sal]
+```
+Here, `gmapT` (generic map transform) deconstructs `Employee`, applies the function `f` to each inner data value and then constructs a new `Employee` from the result.
+
+Similarily, `gmapQ` (generic map query) deconstructs `Employee`, applies the function `f` to each inner data value, then constructs a list of partial results. SYB goes into more details and more general functions that these two, but the point here is that these instances are trivial to implement and could in fact even be generated.
+
+## 2-rank type systems
+
+> TBD: this is some of the prio work that was needed.
+
+## Alt approaches that doesn't work
+
+> TBD: Discuss how it's too strict and why. How it's target purely generic, whatever that means.
+
+> TBD: Discuss how generalized fold just makes another type of boiler plate
+
+> TBD: Discuss The non-recursive map trick
+
+> TBD: Discuss the visitor pattern.
+
+## Derived work
+
+> TBD: There is some cool future work that will be added here.
+
+## References
+
+> TBD: I will for sure have at least for references here.
